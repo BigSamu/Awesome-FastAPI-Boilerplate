@@ -1,0 +1,28 @@
+
+{
+  "user": {
+    "username": "johndoe",
+    "email": "johndoe@og4.com",
+    "company": {
+      "name": "O&G 4",
+      "type": "non-client"
+    }
+  },
+  "root_user": {
+    "username": "alice",
+    "email": "alice@og1.com",
+    "company": {
+      "name": "O&G 1",
+      "type": "client"
+    }
+  },
+  "survey": {
+    "filename": "sample_data_1.sgy",
+    "provider": "SeisCo 1",
+    "location": "North America",
+    "reference_number": "123456"
+  },
+  "access_location": "UK",
+  "shared_access": true
+}
+
