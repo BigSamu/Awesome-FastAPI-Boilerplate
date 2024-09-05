@@ -19,7 +19,7 @@ app = FastAPI(
     terms_of_service="http://project_name.com/terms/",
     contact={
         "name": "Samuel Valdes Gutierrez",
-        "url": "https://github.com/Awesome-FastAPI-Boilerplate",
+        "url": "https://github.com/BigSamu",
         "email": "valdesgutierrez@gmail.com",
     }
     # license_info={
