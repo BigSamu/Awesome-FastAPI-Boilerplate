@@ -13,14 +13,14 @@ from app.core import settings
 # *******************************************************************************
 
 app = FastAPI(
-    title="Seisent Visualizer API",
-    description="Seismic Entitlement Proof of Concept - Visualzier API",
+    title="Awesome FastAPI Boilerplate",
+    description="An starter boilerplate for getting familiar with FastAPY",
     version="1.0.0",
     terms_of_service="http://project_name.com/terms/",
     contact={
-        "name": "Seisent",
-        "url": "https://github.com/Seisent",
-        "email": "contact@seisent.com",
+        "name": "Samuel Valdes Gutierrez",
+        "url": "https://github.com/Awesome-FastAPI-Boilerplate",
+        "email": "valdesgutierrez@gmail.com",
     }
     # license_info={
     #     "name": "The Unlicense",
