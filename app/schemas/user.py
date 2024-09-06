@@ -1,29 +1,21 @@
-from typing import Optional
-
 from pydantic import BaseModel, EmailStr
-
-from app.schemas import CommentResponse
-
 
 class UserCreate(BaseModel):
     username: str
     email: EmailStr
     password: str
-    comment_id: int
-
 
 class UserUpdate(BaseModel):
-    username: Optional[str]
-    email: Optional[EmailStr]
-    password: Optional[str]
-    comment_id: Optional[int]
-
+    username: str | None
+    email: str | None
+    password: str | None
 
 class UserResponse(BaseModel):
     id: int
     username: str
     email: EmailStr
-    comment: CommentResponse
+    posts: list[int] = []
+    comments: list[int] = []
 
     class Config:
         from_attributes = True

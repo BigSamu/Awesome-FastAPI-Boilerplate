@@ -1,5 +1,5 @@
-from app.schemas import UserResponse, PostResponse
 from pydantic import BaseModel
+from app.schemas import UserResponse, PostResponse
 
 class CommentCreate(BaseModel):
     comment: str

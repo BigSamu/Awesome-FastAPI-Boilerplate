@@ -1,6 +1,5 @@
-
-from app.schemas import UserResponse
 from pydantic import BaseModel
+from app.schemas.user import UserResponse
 
 class PostCreate(BaseModel):
     title: str
@@ -16,6 +15,7 @@ class PostResponse(BaseModel):
     title: str
     body: str
     author: UserResponse
+    comments: list[int]
 
     class Config:
         from_attributes = True
