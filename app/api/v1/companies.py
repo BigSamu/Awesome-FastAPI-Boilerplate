@@ -11,7 +11,7 @@ from app.api.deps import get_db, get_current_user
 router = APIRouter()
 
 
-@router.get("", response_model=List[schemas.CompanyResponse])
+@router.get("", response_model=List[schemas.CommentResponse])
 def read_all_companies(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
     """
     Retrieve all companies.
@@ -19,7 +19,7 @@ def read_all_companies(db: Session = Depends(get_db), current_user: models.User 
     companies = crud.company.get_all(db)
     return companies
 
-@router.get("/{company_id}", response_model=schemas.CompanyResponse)
+@router.get("/{company_id}", response_model=schemas.CommentResponse)
 def read_one_company(company_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
     """
     Retrieve one company by id.
@@ -32,8 +32,8 @@ def read_one_company(company_id: int, db: Session = Depends(get_db), current_use
         )
     return company
 
-@router.post("", response_model=schemas.CompanyResponse)
-def create_company(*, db: Session = Depends(get_db), company_in: schemas.CompanyCreate, current_user: models.User = Depends(get_current_user)) -> Any:
+@router.post("", response_model=schemas.CommentResponse)
+def create_company(*, db: Session = Depends(get_db), company_in: schemas.CommentCreate, current_user: models.User = Depends(get_current_user)) -> Any:
     """
     Create new company.
     """
@@ -41,14 +41,14 @@ def create_company(*, db: Session = Depends(get_db), company_in: schemas.Company
     if company:
           raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail=f"Company already exist in database.",
+            detail=f"Comment already exist in database.",
         )
     company = crud.company.create(db, obj_in=company_in)
-    
+
     return company
 
-@router.put("/{company_id}", response_model=schemas.CompanyResponse)
-def update_company(*, company_id: int, db: Session = Depends(get_db), company_in: schemas.CompanyUpdate, current_user: models.User = Depends(get_current_user)) -> Any:
+@router.put("/{company_id}", response_model=schemas.CommentResponse)
+def update_company(*, company_id: int, db: Session = Depends(get_db), company_in: schemas.CommentUpdate, current_user: models.User = Depends(get_current_user)) -> Any:
     """
     Update one company by id.
     """

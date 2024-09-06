@@ -1,6 +1,6 @@
 from datetime import datetime
 
-# Intitial Surveys
+# Intitial Posts
 survey_data = [
     {
         "id": 1,
@@ -14,7 +14,7 @@ survey_data = [
     {
         "id": 2,
         "filename": "sample_data_2.sgy",
-        "image_url": "images/sample_data_2.png",    
+        "image_url": "images/sample_data_2.png",
         "provider": "SeisCo 1",
         "location": "Europe",
         "reference_number":456789,
@@ -90,4 +90,3 @@ company_data = [
         "created_at":datetime.utcnow()
     }
 ]
-

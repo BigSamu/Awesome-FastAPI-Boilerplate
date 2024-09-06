@@ -2,7 +2,7 @@ from typing import Optional
 
 from pydantic import BaseModel, EmailStr
 
-from app.schemas import CompanyResponse
+from app.schemas import CommentResponse
 
 
 class UserCreate(BaseModel):
@@ -23,7 +23,7 @@ class UserResponse(BaseModel):
     id: int
     username: str
     email: EmailStr
-    company: CompanyResponse
+    company: CommentResponse
 
     class Config:
         from_attributes = True

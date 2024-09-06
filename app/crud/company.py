@@ -3,15 +3,14 @@ from typing import Optional, List
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
-from app.models import Company
-from app.schemas import CompanyResponse, CompanyCreate, CompanyUpdate
+from app.models import Comment
+from app.schemas import CommentResponse, CommentCreate, CommentUpdate
 
-class CRUDCompany(CRUDBase[Company, CompanyCreate, CompanyUpdate]):
+class CRUDComment(CRUDBase[Comment, CommentCreate, CommentUpdate]):
     # Declare model specific CRUD operation methods.
 
-    def get_one_by_name(self, db: Session, name: str) -> Company:
-        return db.query(Company).filter(Company.name == name).first()
+    def get_one_by_name(self, db: Session, name: str) -> Comment:
+        return db.query(Comment).filter(Comment.name == name).first()
 
 
-company = CRUDCompany(Company)
-
+company = CRUDComment(Comment)

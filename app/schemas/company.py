@@ -2,15 +2,15 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-class CompanyCreate(BaseModel):
+class CommentCreate(BaseModel):
     name: str
     type: str
 
-class CompanyUpdate(BaseModel):
+class CommentUpdate(BaseModel):
     name: Optional[str]
     type: Optional[str]
 
-class CompanyResponse(BaseModel):
+class CommentResponse(BaseModel):
     id: int
     name: str
     type: str
