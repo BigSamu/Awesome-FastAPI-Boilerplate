@@ -4,15 +4,15 @@ from datetime import datetime, timedelta
 def first_party_caveats_parser(caveats):
     caveats_list_formatted = []
     if "resources" in caveats.keys() and caveats["resources"]:
-        surveyCaveat = ""
+        postCaveat = ""
         for key, value in caveats["resources"].items():
             if value == True:
-                surveyCaveat += f"survey_ref_number = {key} OR "
-        if surveyCaveat != "":
-            surveyCaveat = surveyCaveat[:-4]
+                postCaveat += f"post_ref_number = {key} OR "
+        if postCaveat != "":
+            postCaveat = postCaveat[:-4]
         else:
-            surveyCaveat = "survey_ref_number = None"
-        caveats_list_formatted.append(surveyCaveat)
+            postCaveat = "post_ref_number = None"
+        caveats_list_formatted.append(postCaveat)
 
     if "timeout" in caveats.keys():
         timeout = int(caveats["timeout"])

@@ -14,4 +14,4 @@ class CRUDPost(CRUDBase[Post, PostCreate, PostUpdate]):
         return db.query(Post).filter(Post.filename == filename).first()
 
 
-survey = CRUDPost(Post)
+post = CRUDPost(Post)

@@ -1,9 +1,8 @@
-
 {
   "user": {
     "username": "alice",
     "email": "alice@og1.com",
-    "company": {
+    "comment": {
       "name": "O&G 1",
       "type": "client"
     }
@@ -11,12 +10,12 @@
   "root_user": {
     "username": "alice",
     "email": "alice@og1.com",
-    "company": {
+    "comment": {
       "name": "O&G 1",
       "type": "client"
     }
   },
-  "survey": {
+  "post": {
     "filename": "sample_data_1.sgy",
     "provider": "SeisCo 1",
     "location": "North America",
@@ -25,4 +24,3 @@
   "access_location": "UK",
   "shared_access": false
 }
-

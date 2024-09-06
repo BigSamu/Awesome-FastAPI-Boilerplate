@@ -12,80 +12,80 @@ router = APIRouter()
 
 
 @router.get("", response_model=List[schemas.CommentResponse])
-def read_all_companies(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
+def read_all_comments(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Retrieve all companies.
+    Retrieve all comments.
     """
-    companies = crud.company.get_all(db)
-    return companies
+    comments = crud.comment.get_all(db)
+    return comments
 
-@router.get("/{company_id}", response_model=schemas.CommentResponse)
-def read_one_company(company_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
+@router.get("/{comment_id}", response_model=schemas.CommentResponse)
+def read_one_comment(comment_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Retrieve one company by id.
+    Retrieve one comment by id.
     """
-    company = crud.company.get_one(db, model_id=company_id)
-    if not company:
+    comment = crud.comment.get_one(db, model_id=comment_id)
+    if not comment:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"The company with id '{company_id}' does not exist in the database.",
+            detail=f"The comment with id '{comment_id}' does not exist in the database.",
         )
-    return company
+    return comment
 
 @router.post("", response_model=schemas.CommentResponse)
-def create_company(*, db: Session = Depends(get_db), company_in: schemas.CommentCreate, current_user: models.User = Depends(get_current_user)) -> Any:
+def create_comment(*, db: Session = Depends(get_db), comment_in: schemas.CommentCreate, current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Create new company.
+    Create new comment.
     """
-    company =  crud.company.get_one_by_name(db,name=company_in.name)
-    if company:
+    comment =  crud.comment.get_one_by_name(db,name=comment_in.name)
+    if comment:
           raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail=f"Comment already exist in database.",
         )
-    company = crud.company.create(db, obj_in=company_in)
+    comment = crud.comment.create(db, obj_in=comment_in)
 
-    return company
+    return comment
 
-@router.put("/{company_id}", response_model=schemas.CommentResponse)
-def update_company(*, company_id: int, db: Session = Depends(get_db), company_in: schemas.CommentUpdate, current_user: models.User = Depends(get_current_user)) -> Any:
+@router.put("/{comment_id}", response_model=schemas.CommentResponse)
+def update_comment(*, comment_id: int, db: Session = Depends(get_db), comment_in: schemas.CommentUpdate, current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Update one company by id.
+    Update one comment by id.
     """
-    company = crud.company.get_one(db, model_id=company_id)
-    if not company:
+    comment = crud.comment.get_one(db, model_id=comment_id)
+    if not comment:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"The company with id '{company_id}' does not exist in the database.",
+            detail=f"The comment with id '{comment_id}' does not exist in the database.",
         )
-    company = crud.company.update(db, db_obj=company, obj_in=company_in)
+    comment = crud.comment.update(db, db_obj=comment, obj_in=comment_in)
 
-    return company
+    return comment
 
 @router.delete("", response_model=schemas.Message)
-def delete_all_companies(*, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
+def delete_all_comments(*, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Delete all companies.
+    Delete all comments.
     """
-    companies = crud.company.get_all(db)
-    if not companies:
+    comments = crud.comment.get_all(db)
+    if not comments:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"It doesn't exist any company in the database.",
+            detail=f"It doesn't exist any comment in the database.",
         )
-    rows_deleted = crud.company.remove_all(db)
-    return {"message": f"{rows_deleted} companies were deleted."}
+    rows_deleted = crud.comment.remove_all(db)
+    return {"message": f"{rows_deleted} comments were deleted."}
 
-@router.delete("/{company_id}", response_model=schemas.Message)
-def delete_one_company(*, company_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
+@router.delete("/{comment_id}", response_model=schemas.Message)
+def delete_one_comment(*, comment_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Delete one company by id.
+    Delete one comment by id.
     """
-    company = crud.company.get_one(db, model_id=company_id)
-    if not company:
+    comment = crud.comment.get_one(db, model_id=comment_id)
+    if not comment:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"The company with id '{company_id}' does not exist in the database.",
+            detail=f"The comment with id '{comment_id}' does not exist in the database.",
         )
-    crud.company.remove_one(db, model_id=company.id)
-    return {"message": f"The company with id '{company_id}' deleted."}
+    crud.comment.remove_one(db, model_id=comment.id)
+    return {"message": f"The comment with id '{comment_id}' deleted."}

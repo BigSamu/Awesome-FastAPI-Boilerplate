@@ -44,10 +44,10 @@ def read_one_user(
         - id: ID of the user.
         - username: Username of the user.
         - email: Email of the user.
-        - company:
-            - id: ID of the company.
-            - name: Name of the company.
-            - type: Type of the company.
+        - comment:
+            - id: ID of the comment.
+            - name: Name of the comment.
+            - type: Type of the comment.
 
     **Raises:**
 

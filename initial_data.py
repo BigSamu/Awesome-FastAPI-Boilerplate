@@ -1,7 +1,7 @@
 from datetime import datetime
 
 # Intitial Posts
-survey_data = [
+post_data = [
     {
         "id": 1,
         "filename": "sample_data_1.sgy",
@@ -48,7 +48,7 @@ user_data = [
         "username": "alice",
         "email": "alice@og1.com",
         "password":"$2b$12$.fT0fTvgeN00DTLF8F2zxefh4kJRqlsaDuW0bDGPBBMidFdg9z5hC",
-        "company_id": 1,
+        "comment_id": 1,
         "created_at":datetime.utcnow()
     },
     {
@@ -56,7 +56,7 @@ user_data = [
         "username": "bob",
         "email": "bob@og2.com",
         "password":"$2b$12$1WKV9AIlnrPFsfAIaYhBpuju0un/sazY9pH0Xe0R8noGL.btmq8Iu",
-        "company_id": 2,
+        "comment_id": 2,
         "created_at":datetime.utcnow()
     },
     {
@@ -64,13 +64,13 @@ user_data = [
         "username": "charlie",
         "email": "charlie@og3.com",
         "password":"$2b$12$nzpL8KLon8nZ.RHmLI7vF./kX/LFcFX2utL1a/fzOcFdBaWfqOV2u",
-        "company_id": 3,
+        "comment_id": 3,
         "created_at":datetime.utcnow()
     }
 ]
 
 # Intitial Companies
-company_data = [
+comment_data = [
     {
         "id": 1,
         "name": "O&G 1",

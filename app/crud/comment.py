@@ -13,4 +13,4 @@ class CRUDComment(CRUDBase[Comment, CommentCreate, CommentUpdate]):
         return db.query(Comment).filter(Comment.name == name).first()
 
 
-company = CRUDComment(Comment)
+comment = CRUDComment(Comment)

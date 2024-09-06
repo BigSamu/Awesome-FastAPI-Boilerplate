@@ -11,73 +11,73 @@ from app.api.deps import get_db, get_current_user
 router = APIRouter()
 
 @router.get("", response_model=List[schemas.PostResponse])
-def read_all_surveys(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
+def read_all_posts(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Retrieve all surveys.
+    Retrieve all posts.
     """
-    surveys = crud.survey.get_all(db)
-    return surveys
+    posts = crud.post.get_all(db)
+    return posts
 
-@router.get("/{survey_id}", response_model=schemas.PostResponse)
-def read_one_survey(survey_id:int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
+@router.get("/{post_id}", response_model=schemas.PostResponse)
+def read_one_post(post_id:int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Retrieve one survey by id.
+    Retrieve one post by id.
     """
-    survey = crud.survey.get_one(db, model_id=survey_id)
-    if not survey:
+    post = crud.post.get_one(db, model_id=post_id)
+    if not post:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"The survey with id '{survey_id}' does not exist in the system.",
+            detail=f"The post with id '{post_id}' does not exist in the system.",
         )
-    return survey
+    return post
 
 @router.post("", response_model=schemas.PostResponse)
-def create_survey(*, db: Session = Depends(get_db), survey_in: schemas.PostCreate, current_user: models.User = Depends(get_current_user)) -> Any:
+def create_post(*, db: Session = Depends(get_db), post_in: schemas.PostCreate, current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Create new survey.
+    Create new post.
     """
-    survey = crud.survey.create(db, obj_in=survey_in)
-    return survey
+    post = crud.post.create(db, obj_in=post_in)
+    return post
 
-@router.put("/{survey_id}", response_model=schemas.PostResponse)
-def update_survey(*, survey_id: int, db: Session = Depends(get_db), survey_in: schemas.PostUpdate, current_user: models.User = Depends(get_current_user)) -> Any:
+@router.put("/{post_id}", response_model=schemas.PostResponse)
+def update_post(*, post_id: int, db: Session = Depends(get_db), post_in: schemas.PostUpdate, current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Update existing survey.
+    Update existing post.
     """
-    survey = crud.survey.get_one(db, model_id=survey_id)
-    if not survey:
+    post = crud.post.get_one(db, model_id=post_id)
+    if not post:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"The survey with id '{survey_id}' does not exist in the system.",
+            detail=f"The post with id '{post_id}' does not exist in the system.",
         )
-    survey = crud.survey.update(db, db_obj=survey, obj_in=survey_in)
-    return survey
+    post = crud.post.update(db, db_obj=post, obj_in=post_in)
+    return post
 
 @router.delete("", response_model=schemas.Message)
-def delete_all_surveys(*, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
+def delete_all_posts(*, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Delete all surveys.
+    Delete all posts.
     """
-    surveys = crud.survey.get_all(db)
-    if not surveys:
+    posts = crud.post.get_all(db)
+    if not posts:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"It doesn't exist any survey in the system.",
+            detail=f"It doesn't exist any post in the system.",
         )
-    rows_deleted=crud.survey.remove_all(db)
-    return {"message": f"{rows_deleted} surveys were deleted."}
+    rows_deleted=crud.post.remove_all(db)
+    return {"message": f"{rows_deleted} posts were deleted."}
 
 
-@router.delete("/{survey_id}", response_model=schemas.Message)
-def delete_one_survey(*, survey_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
+@router.delete("/{post_id}", response_model=schemas.Message)
+def delete_one_post(*, post_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
     """
-    Delete one survey by id.
+    Delete one post by id.
     """
-    survey = crud.survey.get_one(db, model_id=survey_id)
-    if not survey:
+    post = crud.post.get_one(db, model_id=post_id)
+    if not post:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"The survey with id '{survey_id}' does not exist in the system.",
+            detail=f"The post with id '{post_id}' does not exist in the system.",
         )
-    crud.survey.remove_one(db, model_id=survey.id)
-    return {"message": f"Post with id '{survey_id}' deleted."}
+    crud.post.remove_one(db, model_id=post.id)
+    return {"message": f"Post with id '{post_id}' deleted."}
