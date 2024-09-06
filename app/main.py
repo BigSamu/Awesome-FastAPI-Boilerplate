@@ -22,10 +22,10 @@ app = FastAPI(
         "url": "https://github.com/BigSamu",
         "email": "valdesgutierrez@gmail.com",
     }
-    # license_info={
-    #     "name": "The Unlicense",
-    #     "url": "https://unlicense.org",
-    # }
+    license_info={
+        "name": "MIT License",
+        "url": "https://github.com/BigSamu/Awesome-FastAPI-Boilerplate/blob/main/LICENSE.md",
+    }
 )
 
 # *******************************************************************************
