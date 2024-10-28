@@ -5,6 +5,7 @@ from app.database.session import SessionLocal
 from app.database.base import Base
 from app.database.session import SessionLocal, engine
 from app import models, schemas, crud
+from app.core import settings
 
 def create_tables() -> None:
     """
@@ -15,7 +16,12 @@ def create_tables() -> None:
 def create_admin_user(db: Session):
     # Try to create the admin user
 
-    admin_user_in = schemas.UserCreate(username="admin", email="admin@example.com", password="admin", role="admin")
+    admin_user_in = schemas.UserCreate(
+        username=settings.ADMIN_USERNAME,
+        email=settings.ADMIN_EMAIL,
+        password=settings.ADMIN_PASSWORD,
+        role="admin"
+    )
     # Check if the user already exists
     user = db.query(models.User).filter(models.User.username == admin_user_in.username).first()
     if not user:

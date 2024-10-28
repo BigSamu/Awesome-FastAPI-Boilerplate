@@ -20,6 +20,9 @@ class Settings(BaseSettings):
 
     # DATABASE SETTINGS
     DATABASE_URL: str = "sqlite:///./mini-blog.db"  # Database Location
+    ADMIN_USERNAME: str = "admin"  # Default Admin Username
+    ADMIN_EMAIL: str = "admin@example.com" # Default Admin Email
+    ADMIN_PASSWORD: str = "admin" # Default Admin Password
 
     ARTS_API_URL: str = "http://localhost:8080"
 
