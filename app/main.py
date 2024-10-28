@@ -29,14 +29,14 @@ app = FastAPI(
 )
 
 # *******************************************************************************
-# DATABASE SETTINGS (SUPPOSING NO MIGRATION TOOL (i.e ALEMBIC))
+# DATABASE INITIALIZATION
 # *******************************************************************************
 
-# Create tables in database.
-from app.database.base import Base
-from app.database.session import engine
+from app.database import init_database
 
-Base.metadata.create_all(bind=engine)
+# Initialise the database
+init_database()
+
 
 # *******************************************************************************
 # CORS SETTINGS

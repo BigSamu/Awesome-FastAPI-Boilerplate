@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app import schemas, crud, models
-from app.api.deps import get_db, get_current_user
+from app.api.deps import get_db, get_current_user, admin_only
 
 router = APIRouter()
 
@@ -64,22 +64,8 @@ def read_one_user(
     return user
 
 
-@router.get("/by_username/{user_username}", response_model=schemas.UserResponse)
-def read_one_user_by_username(user_username: str, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> Any:
-    """
-    Retrieve one user by username.
-    """
-    user = crud.user.get_one_by_username(db, username=user_username)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"The user with username '{user_username}' does not exist in the system.",
-        )
-    return user
-
-
 @router.post("", response_model=schemas.UserResponse)
-def create_user(*, db: Session = Depends(get_db), user_in: schemas.UserCreate) -> Any:
+def create_user(*, db: Session = Depends(get_db), user_in: schemas.UserCreate, current_user: models.User = Depends(admin_only)) -> Any:
     """
     Create new user.
     """
@@ -88,7 +74,7 @@ def create_user(*, db: Session = Depends(get_db), user_in: schemas.UserCreate) -
 
 
 @router.put("/{user_id}", response_model=schemas.UserResponse)
-def update_user(*, user_id: int, db: Session = Depends(get_db), user_in: schemas.UserUpdate, current_user: models.User = Depends(get_current_user)) -> Any:
+def update_user(*, user_id: int, db: Session = Depends(get_db), user_in: schemas.UserUpdate, current_user: models.User = Depends(admin_only)) -> Any:
     """
     Update existing user.
     """
@@ -103,7 +89,7 @@ def update_user(*, user_id: int, db: Session = Depends(get_db), user_in: schemas
 
 
 @router.delete("", response_model=schemas.Message)
-def delete_all_users(*, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> dict[str, str]:
+def delete_all_users(*, db: Session = Depends(get_db), current_user: models.User = Depends(admin_only)) -> dict[str, str]:
     """
     Delete all users.
     """
@@ -118,7 +104,7 @@ def delete_all_users(*, db: Session = Depends(get_db), current_user: models.User
 
 
 @router.delete("/{user_id}", response_model=schemas.Message)
-def delete_one_user(*, user_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)) -> dict[str, str]:
+def delete_one_user(*, user_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(admin_only)) -> dict[str, str]:
     """
     Delete one user by id.
     """

@@ -62,3 +62,15 @@ def get_current_user(
     # exception (one passed as argument)
     except JWTError:
         raise credentials_exception
+
+# *******************************************************************************
+# ADMIN ONLY DEPENDENCY
+# *******************************************************************************
+
+def admin_only(current_user: models.User = Depends(get_current_user)) -> models.User:
+    if current_user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not enough permissions",
+        )
+    return current_user

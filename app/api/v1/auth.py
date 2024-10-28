@@ -38,7 +38,7 @@ def login(
         max_age=86400000,
         httponly=True,
         samesite="strict",
-    ) 
+    )
 
     # Return access token
     return authenticated_user
@@ -69,17 +69,9 @@ def register(
         max_age=86400000,
         httponly=True,
         samesite="strict",
-    ) 
-    
+    )
+
     return registered_user
-
-
-@router.get("/me", response_model=schemas.UserResponse)
-def me(
-    current_user: models.User = Depends(get_current_user)
-):
-    return current_user
-
 
 @router.get("/logout", response_model=schemas.Message)
 def logout(response: Response):

@@ -15,7 +15,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
     def get_one_by_username(self, db: Session, username: str) -> Optional[User]:
         print(username)
         return db.query(User).filter(User.username == username).first()
-        
+
     def get_one_by_email(self, db: Session, email: str) -> Optional[User]:
         print(email)
         return db.query(User).filter(User.email == email).first()
@@ -47,6 +47,12 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         db.commit()
         db.refresh(db_obj)
         return db_obj
+
+    # Override remove all method to avoid deleting admin user
+    def remove_all(self, db: Session) -> int:
+        rows_deleted = db.query(self.model).filter(self.model.username != "admin").delete()
+        db.commit()
+        return rows_deleted
 
     #  Creating authentication method
     def authenticate(
